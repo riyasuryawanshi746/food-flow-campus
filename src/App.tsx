@@ -12,6 +12,9 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import Menu from "./pages/Menu";
+import Order from "./pages/Order";
+import Contact from "./pages/Contact";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 
@@ -67,23 +70,34 @@ const App = () => (
               } 
             />
             
-            {/* Role-based routes */}
             <Route 
               path="/menu" 
               element={
                 <ProtectedRoute>
-                  <Dashboard /> {/* Placeholder - would be replaced with the actual component */}
+                  <Menu />
                 </ProtectedRoute>
               } 
             />
+
             <Route 
               path="/order" 
               element={
                 <ProtectedRoute allowedRoles={["student", "staff"]}>
-                  <Dashboard /> {/* Placeholder - would be replaced with the actual component */}
+                  <Order />
                 </ProtectedRoute>
               } 
             />
+
+            <Route 
+              path="/contact" 
+              element={
+                <ProtectedRoute>
+                  <Contact />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Role-based routes */}
             <Route 
               path="/mess-card" 
               element={
@@ -164,7 +178,7 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
-            
+
             {/* Other routes */}
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
