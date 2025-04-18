@@ -1,4 +1,3 @@
-
 import { useState, ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -47,7 +46,7 @@ interface NavItem {
   roles: string[];
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const location = useLocation();
@@ -225,32 +224,36 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <div className="flex flex-col flex-1 overflow-hidden">
         {/* Header */}
         <header className="flex h-14 items-center gap-4 border-b bg-white px-4 md:px-6">
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <MenuIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-64 p-0">
-              <div className="flex h-14 items-center border-b px-4">
-                <Link to="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-orange-600">
-                  <UtensilsIcon className="h-5 w-5" />
-                  <span>FoodFlow Campus</span>
-                </Link>
-              </div>
-              <nav className="grid gap-1 p-2">
-                {filteredNavItems.map((item) => (
-                  <NavLink key={item.href} item={item} />
-                ))}
-              </nav>
-              <Separator />
-              <Button variant="ghost" className="w-full justify-start gap-2 p-2" onClick={handleLogout}>
-                <LogOutIcon className="h-4 w-4" />
-                <span>Log out</span>
-              </Button>
-            </SheetContent>
-          </Sheet>
+        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+  <SheetTrigger asChild>
+    <Button variant="ghost" size="icon" className="md:hidden">
+      <MenuIcon className="h-5 w-5" />
+      <span className="sr-only">Toggle menu</span>
+    </Button>
+  </SheetTrigger>
+  <SheetContent side="left" className="w-64 p-0">
+    <div className="flex h-14 items-center border-b px-4">
+      <Link to="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-orange-600">
+        <UtensilsIcon className="h-5 w-5" />
+        <span>FoodFlow Campus</span>
+      </Link>
+    </div>
+    
+    <nav className="grid gap-1 p-2">
+      {filteredNavItems.map((item) => (
+        <NavLink key={item.href} item={item} />
+      ))}
+    </nav>
+
+    <Separator />
+
+    <Button variant="ghost" className="w-full justify-start gap-2 p-2" onClick={handleLogout}>
+      <LogOutIcon className="h-4 w-4" />
+      <span>Log out</span>
+    </Button>
+  </SheetContent>
+</Sheet>
+
           
           <div className="md:hidden flex items-center gap-2 font-semibold">
             <UtensilsIcon className="h-5 w-5 text-orange-600" />
